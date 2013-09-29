@@ -16,7 +16,7 @@ public class GestionCategoria {
         
         // Categoria catOficina = GestionCategoria.insertar("oficina", "prodcutos de oficina");
         // Categoria catCasa = GestionCategoria.insertar("casa", "prodcutos de casa");
-        GestionCategoria.listar();
+        //GestionCategoria.listar();
         
     }
     

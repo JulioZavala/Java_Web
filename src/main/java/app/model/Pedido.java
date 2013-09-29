@@ -62,6 +62,14 @@ public class Pedido {
         this.detalles = detalles;
     }
 
+    public Pedido(String idUsuario, String fecha, String estado, double total) {
+        this.idUsuario = idUsuario;
+        this.fecha = fecha;
+        this.estado = estado;
+        this.total = total;
+    }
 
 
+
+    
 }

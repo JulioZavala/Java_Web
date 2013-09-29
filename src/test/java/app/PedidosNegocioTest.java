@@ -6,6 +6,7 @@ package app;
 
 import app.dao.DAOExcepcion;
 import app.model.DetallePedido;
+import app.model.Pedido;
 import app.service.PedidosNegocio;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,6 +19,8 @@ import org.junit.Test;
  */
 public class PedidosNegocioTest {
 
+   
+    
     @Test
     public void realizarPedidoTest() {
 
@@ -36,8 +39,13 @@ public class PedidosNegocioTest {
         detalles.add(dp2);
 
         PedidosNegocio negocio = new PedidosNegocio();
+        
+        Pedido pedido = new Pedido("david", "2011-07-15", "1", 500);
+        
+        
+        
         try {
-            negocio.realizarPedido("david", "2011-07-15", "1", 500, detalles);
+            negocio.realizarPedido(pedido, detalles);
         } catch (DAOExcepcion e) {
             Assert.fail("Falló la inserción");
         }

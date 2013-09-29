@@ -5,18 +5,17 @@
 package app.dao;
 
 import app.model.DetallePedido;
-import app.zelper.ConexionDB;
 import app.model.Pedido;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import app.zelper.ConexionDB;
 
 
 public class PedidoDAO extends BaseDAO {
 
-    public Pedido insertar(Pedido vo) throws DAOExcepcion {
+    public Pedido insertar(Pedido pedido) throws DAOExcepcion {
         System.out.println("PedidoDAO: insertar()");
         String query = "INSERT INTO pedido (id_usuario,fecha,estado,total) VALUES (?,?,?,?)";
         Connection con = null;
@@ -24,13 +23,13 @@ public class PedidoDAO extends BaseDAO {
         ResultSet rs = null;
 
         try {
-            con = ConexionBD.obtenerConexion();
+            con = ConexionDB.obtenerConexion();
             con.setAutoCommit(false);
             stmt = con.prepareStatement(query);
-            stmt.setString(1, vo.getIdUsuario());
-            stmt.setString(2, vo.getFecha());
-            stmt.setString(3, vo.getEstado());
-            stmt.setDouble(4, vo.getTotal());
+            stmt.setString(1, pedido.getIdUsuario());
+            stmt.setString(2, pedido.getFecha());
+            stmt.setString(3, pedido.getEstado());
+            stmt.setDouble(4, pedido.getTotal());
 
             int i = stmt.executeUpdate();
             if (i != 1) {
@@ -44,9 +43,9 @@ public class PedidoDAO extends BaseDAO {
             if (rs.next()) {
                 idp = rs.getInt(1);
             }
-            vo.setIdPedido(idp);
+            pedido.setIdPedido(idp);
 
-            for (DetallePedido ped : vo.getDetalles()) {
+            for (DetallePedido ped : pedido.getDetalles()) {
                 query = "INSERT INTO detalle_pedido(id_pedido, id_producto, precio, cantidad) VALUES (?,?,?,?)";
                 stmt = con.prepareStatement(query);
                 stmt.setInt(1, idp);
@@ -86,6 +85,6 @@ public class PedidoDAO extends BaseDAO {
             this.cerrarStatement(stmt);
             this.cerrarConexion(con);
         }
-        return vo;
+        return pedido;
     }
 }
