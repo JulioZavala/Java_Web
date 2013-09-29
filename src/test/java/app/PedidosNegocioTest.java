@@ -10,7 +10,6 @@ import app.service.PedidosNegocio;
 import java.util.ArrayList;
 import java.util.Collection;
 import junit.framework.Assert;
-import junit.framework.Test;
 import org.junit.Test;
 
 /**
